@@ -1,0 +1,115 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API"
+  version: "1.0.0"
+  title: "What doctor côté professionnel de santé"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/pierre.villiers/whatdoctor-prof/1.0.0"
+schemes:
+- "https"
+paths:
+  /pro-sante:
+    post:
+      summary: "Ajoute un professionnel de santé"
+      operationId: "addProfessionnelSante"
+      parameters:
+      - in: "body"
+        name: "professionnelSante"
+        required: false
+        schema:
+          $ref: "#/definitions/ProfessionnelSante"
+      responses:
+        "201":
+          description: "professionnel créé"
+      x-swagger-router-controller: "Default"
+  /pro-sante/recherche/{speciality}:
+    post:
+      summary: "Recherche de professionnel par spécialité"
+      operationId: "pro_santeRechercheSpecialityPOST"
+      parameters:
+      - name: "speciality"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "cordonnee"
+        required: true
+        schema:
+          $ref: "#/definitions/Coordonnee"
+      responses:
+        "201":
+          description: "voici les professionnels de santé avec cette spécialité"
+      x-swagger-router-controller: "Default"
+  /pro-sante/addPatient:
+    post:
+      summary: "Ajouter un patient suivi à un professionnel de santé"
+      operationId: "pro_santeAddPatientPOST"
+      parameters:
+      - in: "body"
+        name: "ids"
+        required: true
+        schema:
+          $ref: "#/definitions/Ids"
+      responses:
+        "201":
+          description: "Le patient suivi a été ajouté au professionnel de santé"
+      x-swagger-router-controller: "Default"
+definitions:
+  ProfessionnelSante:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "speciality"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Bridget"
+      speciality:
+        type: "string"
+        example: "Podologue"
+      nbPatientfollowed:
+        type: "array"
+        example:
+        - 6
+        - 7
+        - 9
+        items:
+          $ref: "#/definitions/PatientId"
+      coordonnee:
+        $ref: "#/definitions/Coordonnee"
+  PatientId:
+    type: "integer"
+  Coordonnee:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d250f1ee-6c54-4b01-90e6-d701748f0851"
+      longitude:
+        type: "number"
+        example: 5.70000000000000017763568394002504646778106689453125
+      latitude:
+        type: "number"
+        example: 7
+  Ids:
+    type: "object"
+    properties:
+      patientId:
+        type: "integer"
+        example: 7
+      prosanteId:
+        type: "string"
+        format: "uuid"
+        example: "d250f1ee-6c54-4e01-90e6-d701748f0851"

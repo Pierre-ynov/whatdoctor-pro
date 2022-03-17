@@ -1,14 +1,20 @@
 {
-  "name": "whatdoctor-pro",
+  "name": "what-doctor-c-t-professionnel-de-sant",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a simple API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "npm install",
+    "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
   "dependencies": {
-    "express": "^4.17.3"
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1"
   }
 }
