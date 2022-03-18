@@ -9,9 +9,13 @@ const { db } = require("../configs/dbConfig");
  * professionnelSante ProfessionnelSante  (optional)
  * no response value expected for this operation
  **/
-exports.addProfessionnelSante = function(professionnelSante) {
+exports.addProfessionnelSante = async function(professionnelSante) {
+  const res = await db.query(
+    'INSERT INTO professionnalSante (id,name,speciality,longitude,latitude) VALUES ($1,$2,$3,$4,$5)',
+    [professionnelSante.id,professionnelSante.name,professionnelSante.speciality,
+    professionnelSante.longitude,professionnelSante.longitude]);
   return new Promise(function(resolve, reject) {
-    resolve();
+    resolve("Professionnel de sante creee");
   });
 }
 
@@ -22,9 +26,11 @@ exports.addProfessionnelSante = function(professionnelSante) {
  * ids Ids 
  * no response value expected for this operation
  **/
-exports.pro_santeAddPatientPOST = function(ids) {
+exports.pro_santeAddPatientPOST = async function(ids) {
+  const res = await db.query('INSERT INTO patientlinkprofessionnelsante (patientid,professionnelsanteid) VALUES ($1,$2)',
+  [ids.patientId,ids.professionnelSanteId]);
   return new Promise(function(resolve, reject) {
-    resolve();
+    resolve("Patient suivi a ete ajoute au profesionnel de sante");
   });
 }
 
@@ -38,7 +44,7 @@ exports.pro_santeAddPatientPOST = function(ids) {
  **/
 exports.pro_santeRechercheSpecialityPOST = async function(speciality,cordonnee) {
   return new Promise(function(resolve, reject) {
-    resolve(rows);
+    resolve();
   });
 }
 
