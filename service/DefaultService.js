@@ -1,5 +1,7 @@
 'use strict';
 
+const { db } = require("../configs/dbConfig");
+
 
 /**
  * Ajoute un professionnel de santé
@@ -34,9 +36,9 @@ exports.pro_santeAddPatientPOST = function(ids) {
  * cordonnee Coordonnee 
  * no response value expected for this operation
  **/
-exports.pro_santeRechercheSpecialityPOST = function(speciality,cordonnee) {
+exports.pro_santeRechercheSpecialityPOST = async function(speciality,cordonnee) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    resolve(rows);
   });
 }
 
