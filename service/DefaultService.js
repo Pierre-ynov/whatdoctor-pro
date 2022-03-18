@@ -37,8 +37,9 @@ exports.pro_santeAddPatientPOST = function(ids) {
  * no response value expected for this operation
  **/
 exports.pro_santeRechercheSpecialityPOST = async function(speciality,cordonnee) {
+  const result = await db.query(`SELECT * FROM professionnelsante WHERE speciality = ${speciality}`)
   return new Promise(function(resolve, reject) {
-    resolve(rows);
+    resolve(result);
   });
 }
 
